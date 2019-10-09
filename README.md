@@ -20,6 +20,7 @@ add a timer,
 add more levels,
 add more bosses,
 add mobs,
-add more attacks
-
+add more attacks,
+add username system,
+add multiplayer
 ![](gamePreview.gif)
