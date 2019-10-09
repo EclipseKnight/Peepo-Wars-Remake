@@ -14,3 +14,10 @@ M to mute the music.
 ~~P to pause the game~~.
 
 R to restart.
+
+TODO:
+add a timer
+add more levels
+add more bosses
+add mobs
+add more attacks
