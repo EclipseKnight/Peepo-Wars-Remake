@@ -16,8 +16,8 @@ M to mute the music.
 R to restart.
 
 TODO:
-add a timer
-add more levels
-add more bosses
-add mobs
+add a timer,
+add more levels,
+add more bosses,
+add mobs,
 add more attacks
