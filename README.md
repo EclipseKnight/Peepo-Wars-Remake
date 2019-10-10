@@ -15,6 +15,8 @@ M to mute the music.
 
 R to restart.
 
+H to display hitboxes.
+
 TODO:
 add a timer,
 add more levels,
