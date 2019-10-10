@@ -60,7 +60,7 @@ public class AudioPlayer {
 			}
 			
 			gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-25.0f);
+			gainControl.setValue(-30.0f);
 			
 			muteControl = (BooleanControl) clip.getControl(BooleanControl.Type.MUTE);
 			muteControl.setValue(false);

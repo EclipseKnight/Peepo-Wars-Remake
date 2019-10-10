@@ -1,10 +1,10 @@
 package game.levels;
 
 import game.Game;
-import game.sprites.mobs.Player;
 import game.sprites.mobs.mobs.ContinueButton;
 import game.sprites.mobs.mobs.PeepoWarsLogo;
 import game.sprites.mobs.mobs.QuitButton;
+import game.sprites.mobs.players.Player;
 
 public class Level0 extends Level {
 
@@ -52,6 +52,7 @@ public class Level0 extends Level {
 		
 		for(Player p : players) {
 			p.setHealth(p.getMaxHealth());
+			p.setShield(p.getMaxShield());
 			p.reset();
 		}
 	}

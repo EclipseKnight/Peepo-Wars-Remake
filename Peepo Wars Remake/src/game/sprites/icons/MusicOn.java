@@ -10,7 +10,7 @@ public class MusicOn extends Sprite {
 	}
 	
 	private void initGFX() {
-		loadImage("icons/bgmon.png");
-		getImageDimensions(1);
+		loadImage("icons/soundon.png");
+		getImageDimensions(3);
 	}
 }

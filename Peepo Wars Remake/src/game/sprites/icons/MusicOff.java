@@ -10,7 +10,7 @@ public class MusicOff extends Sprite {
 	}
 	
 	private void initGFX() {
-		loadImage("icons/bgmoff.png");
-		getImageDimensions(1);
+		loadImage("icons/soundoff.png");
+		getImageDimensions(3);
 	}
 }

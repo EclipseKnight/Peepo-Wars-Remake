@@ -6,7 +6,7 @@ import java.util.List;
 import game.Game;
 import game.sprites.mobs.Boss;
 import game.sprites.mobs.Mob;
-import game.sprites.mobs.Player;
+import game.sprites.mobs.players.Player;
 
 public abstract class Level {
 

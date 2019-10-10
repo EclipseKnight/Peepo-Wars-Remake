@@ -6,8 +6,8 @@ import java.util.List;
 import game.Game;
 import game.sprites.hitbox.HitBox;
 import game.sprites.hitbox.HitBox.HitBoxType;
+import game.sprites.mobs.players.Player;
 import game.sprites.hitbox.RectangleHitBox;
-import game.sprites.mobs.Player;
 
 public class IceWave extends Attack {
 

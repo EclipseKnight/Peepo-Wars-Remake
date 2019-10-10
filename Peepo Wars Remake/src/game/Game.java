@@ -28,7 +28,7 @@ import game.levels.Level1;
 import game.levels.Level2;
 import game.sprites.mobs.Boss;
 import game.sprites.mobs.Mob;
-import game.sprites.mobs.Player;
+import game.sprites.mobs.players.Player;
 import resources.ResourceLoader;
 
 public class Game extends Canvas implements Runnable {
@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable {
 	public static final float GAME_MIN_WIDTH = 0;
 	public static final float GAME_MAX_WIDTH = 1000;
 	public static final float GAME_MIN_HEIGHT = 0;
-	public static final float GAME_MAX_HEIGHT = 650;
+	public static final float GAME_MAX_HEIGHT = 700;
 	//In game borders.
 	public static final int GAME_MIN_BORDER = 20;
 	public static final int GAME_MAX_BORDER = 450;
@@ -255,7 +255,7 @@ public class Game extends Canvas implements Runnable {
 		
 		//Starting level
 		level = levels.get(0);
-		level.addPlayer(new Player(30, 100, "Eclipse", input));
+		level.addPlayer(new Player(30, Game.GAME_MAX_BORDER/2, "Eclipse", input));
 	}
 
 }

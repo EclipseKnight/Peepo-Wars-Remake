@@ -19,17 +19,18 @@ import game.sprites.icons.MusicOff;
 import game.sprites.icons.MusicOn;
 import game.sprites.mobs.Boss;
 import game.sprites.mobs.Mob;
-import game.sprites.mobs.Player;
 import game.sprites.mobs.ammunition.Ammunition;
 import game.sprites.mobs.ammunition.Laser;
 import game.sprites.mobs.ammunition.Missile;
 import game.sprites.mobs.attacks.Attack;
+import game.sprites.mobs.players.Player;
 import resources.ResourceLoader;
 
 public class RenderHandler {
 
 	private Game game;
 
+	private Color[] colors = {new Color(18, 233, 255, 90), new Color(235, 9, 21, 90), new Color(9, 235, 51, 90), new Color(235, 145, 9, 90)};
 	public RenderHandler(Game game) {
 		this.game = game;
 	}
@@ -38,7 +39,7 @@ public class RenderHandler {
 		g2d.setColor(Color.DARK_GRAY);
 		g2d.drawString("FPS:" + Game.fps, 0, Game.GAME_MIN_BORDER - 5);
 		g2d.drawString("TPS:" + Game.tps, 100, Game.GAME_MIN_BORDER - 5);
-//		g2d.drawString("TPS:" + game.gameState, 200, Game.GAME_MIN_BORDER - 5);
+		
 	}
 
 	public void renderBorder(Graphics2D g2d) {
@@ -52,12 +53,17 @@ public class RenderHandler {
 	}
 
 	public void renderPlayers(Graphics2D g2d, List<Player> players) {
-		for (Player p : players) {
+		for(int i = 0; i < players.size(); i++) {
+			Player p = players.get(i);
+			
+			g2d.setColor(colors[i]);
+			g2d.fillOval((int) (p.getX() - p.getWidth()*.24), (int) p.getY() - 6, (int) (p.getWidth() * 1.5), (int) (p.getWidth() * 1.5));
 			g2d.drawImage(p.getImage(), (int) p.getX(), (int) p.getY(), p.getWidth(), p.getHeight(), null);
 			if(Game.showhitbox) {
 				renderHitBox(g2d, p.getHitBox());
 			}
 		}
+		
 	}
 	
 	public void renderMobs(Graphics2D g2d, List<Mob> mobs) {
@@ -87,8 +93,8 @@ public class RenderHandler {
 	public void renderUI(Graphics2D g2d) {
 		Image music = null;
 
-		g2d.setColor(Color.lightGray);
-		g2d.fillRoundRect((int) Game.GAME_MAX_WIDTH / 2 - 40, (int) Game.GAME_MAX_HEIGHT - 50, 80, 40, 10, 10);
+//		g2d.setColor(Color.lightGray);
+//		g2d.fillRoundRect((int) Game.GAME_MAX_WIDTH / 2 - 40, (int) Game.GAME_MAX_HEIGHT - 50, 80, 40, 10, 10);
 
 		if (AudioPlayer.status.equals("play")) {
 			music = new MusicOn(0, 0).getImage();
@@ -118,7 +124,7 @@ public class RenderHandler {
 				g2d.drawImage(image, (int) (slot.getX() + slot.getWidth()/5), (int) (slot.getY() + slot.getHeight()/3), (int) ((image.getWidth(null) * 2) * Game.GAME_SCALE), 
 						(int) ((image.getHeight(null) * 2) * Game.GAME_SCALE), null);
 				if(game.level.getPlayers().get(0).getWeapon() == i+1) {
-					g2d.setColor(Color.blue);
+					g2d.setColor(Color.white);
 				} else
 					g2d.setColor(Color.DARK_GRAY);
 				g2d.draw(slot);
@@ -201,35 +207,41 @@ public class RenderHandler {
 		
 		Rectangle bar;
 		Rectangle health;
+		Rectangle shield;
 		g2d.setFont(game.gameFont.deriveFont(10f));
 		
 		
 		for(int i = 0; i < game.level.getBosses().size(); i++) {
 			var b = game.level.getBosses().get(i);
 			
-			bar = new Rectangle( (int) (Game.GAME_MAX_WIDTH - 370), (int) Game.GAME_MAX_HEIGHT - 90 / (i+1), 350, 20); 
+			bar = new Rectangle( (int) (Game.GAME_MAX_WIDTH - 440), (int) Game.GAME_MAX_HEIGHT - 170 + (i*45), 400, 20); 
 			health = new Rectangle( bar.x+1, bar.y+1, barCalculateBoss(b, bar.width)-1, bar.height-1);
 			
-			g2d.setColor(Color.gray);
+			g2d.setColor(Color.white);
 			g2d.draw(bar);
 			g2d.setColor(Color.red);
 			g2d.fill(health);
 			g2d.setColor(Color.white);
-			g2d.drawString(b.getHealth() + "/" + b.getMaxHealth(), (int)(bar.x*1.01), bar.y+14);
+			g2d.drawString("HP: " + b.getHealth() + "/" + b.getMaxHealth(), (int)(bar.x*1.01), bar.y+14);
 			g2d.drawString(b.getName(), (int)(bar.x*1.01), bar.y-10);
 		}
 		
 		for(int i = 0; i < game.level.getPlayers().size(); i++) {
 			var p = game.level.getPlayers().get(i);
-			bar = new Rectangle( 10, (int) Game.GAME_MAX_HEIGHT - 90 / (i+1), 350, 20);
-			health = new Rectangle( bar.x+1, bar.y+1, barCalculateShip(p, bar.width)-1, bar.height-1);
 			
-			g2d.setColor(Color.gray);
+			bar = new Rectangle( 10, (int) Game.GAME_MAX_HEIGHT - 170 + (i*45), 400, 20);
+			health = new Rectangle( bar.x+1, bar.y+1, barCalculateShip(p, bar.width, 0)-1, bar.height-1);
+			shield = new Rectangle( bar.x+1, bar.y+1, barCalculateShip(p, bar.width, 1)-1, bar.height-1);
+			
+			g2d.setColor(Color.white);
 			g2d.draw(bar);
 			g2d.setColor(Color.red);
 			g2d.fill(health);
+			g2d.setColor(Color.cyan);
+			g2d.fill(shield);
 			g2d.setColor(Color.white);
-			g2d.drawString(p.getHealth() + "/" + p.getMaxHealth(), (int)(bar.x*1.01), bar.y+14);
+			g2d.drawString("HP: " + p.getHealth() + "/" + p.getMaxHealth(), (int)(bar.x*1.5), bar.y+14);
+			g2d.drawString("Shield: " + p.getShield() + "/" + p.getMaxShield(), (int)(bar.x*22), bar.y+14);
 			g2d.drawString(p.getName(), (int)(bar.x*1.01), bar.y-10);
 		}
 			
@@ -238,14 +250,14 @@ public class RenderHandler {
 			
 			if(m.showHealth()) {
 				bar = new Rectangle( (int) m.getX(), (int) m.getY() + m.getHeight()+10, m.getWidth(), 10);
-				health = new Rectangle( bar.x+1, bar.y+1, (int)(barCalculate(m))-1 , 10);
+				health = new Rectangle( bar.x+1, bar.y+1, (int)(barCalculate(m))-1 , 9);
 				
-				g2d.setColor(Color.gray);
+				g2d.setColor(Color.white);
 				g2d.draw(bar);
 				g2d.setColor(Color.red);
 				g2d.fill(health);
 				g2d.setColor(Color.white);
-				g2d.drawString(m.getHealth() + "/" + m.getMaxHealth(), (int)(bar.x*1.01), bar.y+10);
+				g2d.drawString(m.getHealth() + " " /*+ "/" + m.getMaxHealth() */, (int)(bar.x*1.01), bar.y+10);
 			}
 		}
 	}
@@ -261,8 +273,15 @@ public class RenderHandler {
 	}
 		
 	//Calculates Ship HP bar size
-	private int barCalculateShip(Player p, int width) {
-		return (int)(p.getHealth()/p.getMaxHealth() * width);
+	private int barCalculateShip(Player p, int width, int type) {
+		if(type == 0) 
+			return (int)(p.getHealth()/p.getMaxHealth() * width);
+		
+		if(type == 1) 
+			return (int)(p.getShield()/p.getMaxHealth() * width);
+		
+		return 0;
+		
 	}
 
 	public void renderWin(Graphics2D g2d) {

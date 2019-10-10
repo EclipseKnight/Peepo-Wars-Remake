@@ -7,7 +7,7 @@ import game.sprites.hitbox.HitBox;
 import game.sprites.hitbox.HitBox.HitBoxType;
 import game.sprites.hitbox.RectangleHitBox;
 import game.sprites.mobs.Boss;
-import game.sprites.mobs.Player;
+import game.sprites.mobs.players.Player;
 
 public class IceBeam extends Attack {
 

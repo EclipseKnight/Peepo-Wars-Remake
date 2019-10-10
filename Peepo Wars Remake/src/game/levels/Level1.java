@@ -1,8 +1,8 @@
 package game.levels;
 
 import game.Game;
-import game.sprites.mobs.Player;
 import game.sprites.mobs.bosses.StrobeKing;
+import game.sprites.mobs.players.Player;
 
 public class Level1 extends Level {
 

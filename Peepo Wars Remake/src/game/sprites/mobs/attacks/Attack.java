@@ -5,7 +5,7 @@ import java.util.List;
 import game.sprites.Sprite;
 import game.sprites.hitbox.HitBox;
 import game.sprites.hitbox.HitBox.HitBoxType;
-import game.sprites.mobs.Player;
+import game.sprites.mobs.players.Player;
 
 public abstract class Attack extends Sprite {
 

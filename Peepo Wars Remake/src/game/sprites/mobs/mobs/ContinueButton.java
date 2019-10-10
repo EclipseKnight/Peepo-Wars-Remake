@@ -10,8 +10,8 @@ import game.sprites.mobs.Mob;
 
 public class ContinueButton extends Mob {
 	
-	public static final float HEALTH = 1;
-	public static final float MAXHEALTH = 1;
+	public static final float HEALTH = 100;
+	public static final float MAXHEALTH = 100;
 	public static final float SPEED = 3f;
 	public static final String NAME = "Continue";
 	private Level0 level;
@@ -19,7 +19,7 @@ public class ContinueButton extends Mob {
 	private boolean moveUp = false;
 	private int tickCount = 0;
 	public ContinueButton(float x, float y, Level0 level) {
-		super(x, y, HEALTH, MAXHEALTH, SPEED, NAME, false);
+		super(x, y, HEALTH, MAXHEALTH, SPEED, NAME, true);
 		this.level = level;
 		initGFX();
 	}
@@ -33,7 +33,7 @@ public class ContinueButton extends Mob {
 	public void tick() {
 	tickCount++;
 		
-		if(moveUp && tickCount % 60 == 0) {
+		if(moveUp && tickCount % 40 == 0) {
 			y += speed;
 			moveUp = false;
 			
@@ -41,7 +41,7 @@ public class ContinueButton extends Mob {
 			return;
 		}
 		
-		if(!moveUp && tickCount % 60 == 0) {
+		if(!moveUp && tickCount % 40 == 0) {
 			y -= speed;
 			moveUp = true;
 			

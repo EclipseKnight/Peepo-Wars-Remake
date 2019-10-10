@@ -7,9 +7,9 @@ import game.Game;
 import game.sprites.hitbox.HitBox;
 import game.sprites.mobs.Boss;
 import game.sprites.mobs.Mob;
-import game.sprites.mobs.Player;
 import game.sprites.mobs.ammunition.Ammunition;
 import game.sprites.mobs.attacks.Attack;
+import game.sprites.mobs.players.Player;
 
 public class UpdateHandler {
 
@@ -21,7 +21,10 @@ public class UpdateHandler {
 	
 	public void updatePlayers() {
 		for(Player p : game.level.getPlayers()) {
-			p.tick();
+			if(p.getHealth() > 0) {
+				p.tick();
+			}
+			
 		}
 	}
 	

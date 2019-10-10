@@ -8,7 +8,7 @@ import game.levels.Level;
 import game.levels.Level0;
 import game.levels.Level1;
 import game.levels.Level2;
-import game.sprites.mobs.Player;
+import game.sprites.mobs.players.Player;
 
 public class LevelHandler {
 
@@ -49,8 +49,8 @@ public class LevelHandler {
 				List<Player> players = new ArrayList<>();
 				players = game.level.getPlayers();
 				
-				//Resets health and clears the list of currently fired ammo.
-				resetPlayers(players);
+				//Resets health, shield and clears the list of currently fired ammo.
+				resetPlayers(players, true);
 				
 				//sets the current level to the first level.
 				game.level = game.levels.get(0);
@@ -83,7 +83,7 @@ public class LevelHandler {
 				players = game.level.getPlayers();
 				
 				//Resets health and clears the list of currently fired ammo.
-				resetPlayers(players);
+				resetPlayers(players, false);
 				
 				//sets the current level to the next one.
 				game.level = game.levels.get(game.level.getLevelNumber() + 1);
@@ -105,7 +105,7 @@ public class LevelHandler {
 				List<Player> players = new ArrayList<>();
 				players = game.level.getPlayers();
 				
-				resetPlayers(players);
+				resetPlayers(players, true);
 				
 				game.level = game.levels.get(0);
 				
@@ -120,8 +120,12 @@ public class LevelHandler {
 	}
 	
 	
-	private void resetPlayers(List<Player> players) {
+	private void resetPlayers(List<Player> players, boolean resetShield) {
 		players.forEach(player -> {
+			if(resetShield) {
+				player.setShield(player.getMaxShield());
+			}
+				
 			player.setHealth(player.getMaxHealth());
 			player.clearAmmoFired();
 			player.reset();

@@ -29,7 +29,7 @@ public class PeepoWarsLogo extends Mob {
 	public void tick() {
 	tickCount++;
 		
-		if(moveUp && tickCount % 60 == 0) {
+		if(moveUp && tickCount % 40 == 0) {
 			y += speed;
 			moveUp = false;
 			
@@ -37,7 +37,7 @@ public class PeepoWarsLogo extends Mob {
 			return;
 		}
 		
-		if(!moveUp && tickCount % 60 == 0) {
+		if(!moveUp && tickCount % 40 == 0) {
 			y -= speed;
 			moveUp = true;
 			
