@@ -9,6 +9,9 @@ Space to fire your weapons.
 
 1, 2 to choose between the two weapons.
 
+S to toggle shield mode.
+D to toggle demon mode.
+
 M to mute the music.
 
 ~~P to pause the game~~.
